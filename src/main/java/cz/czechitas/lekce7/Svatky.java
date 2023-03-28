@@ -2,6 +2,7 @@ package cz.czechitas.lekce7;
 
 import java.time.Month;
 import java.time.MonthDay;
+import java.time.temporal.TemporalAccessor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -59,8 +60,7 @@ public class Svatky {
    * @return Den a měsíc, případně {@code null}, pokud jméno nebylo nalezeno.
    */
   public MonthDay kdyMaSvatek(String jmeno) {
-    //TODO
-    return null;
+    return svatky.get(jmeno);
   }
 
   /**
@@ -69,8 +69,10 @@ public class Svatky {
    * @return {@code true}, pokud je jméno v seznamu. Jinak vrací {@code false}.
    */
   public boolean jeVSeznamu(String jmeno) {
-    //TODO
-    return false;
+    if (svatky.containsKey(jmeno)){
+      return true;
+          }
+    else {return false;}
   }
 
   /**
@@ -78,8 +80,7 @@ public class Svatky {
    * @return
    */
   public int getPocetJmen() {
-    //TODO
-    return 0;
+    return svatky.size();
   }
 
   /**
@@ -87,8 +88,8 @@ public class Svatky {
    * @return Neseřazený seznam jmen.
    */
   public Set<String> getSeznamJmen() {
-    //TODO
-    return null;
+    return svatky.keySet();
+
   }
 
   /**
@@ -97,7 +98,7 @@ public class Svatky {
    * @param denMesic Den a měsíc, kdy má dané jméno svátek.
    */
   public void pridatSvatek(String jmeno, MonthDay denMesic) {
-    //TODO
+    svatky.put(jmeno,denMesic);
   }
 
   /**
@@ -107,7 +108,8 @@ public class Svatky {
    * @param mesic Měsíc, kdy má dané jméno svátek (1–12).
    */
   public void pridatSvatek(String jmeno, int den, int mesic) {
-    //TODO
+
+    svatky.put(jmeno, MonthDay.of(mesic,den));
   }
 
   /**
@@ -117,7 +119,7 @@ public class Svatky {
    * @param mesic Měsíc, kdy má dané jméno svátek.
    */
   public void pridatSvatek(String jmeno, int den, Month mesic) {
-    //TODO
+    svatky.put(jmeno, MonthDay.of(mesic,den));
   }
 
   /**
@@ -125,6 +127,6 @@ public class Svatky {
    * @param jmeno Jméno ke smazání.
    */
   public void smazatSvatek(String jmeno) {
-    //TODO
+    svatky.remove(jmeno);
   }
 }
