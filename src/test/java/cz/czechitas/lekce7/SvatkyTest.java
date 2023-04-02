@@ -30,9 +30,7 @@ class SvatkyTest {
     Svatky svatky = new Svatky();
     assertTrue(svatky.jeVSeznamu("Nataša"));
     assertFalse(svatky.jeVSeznamu("paosidhf"));
-
-  //TODO Otestovat, že najde v seznamu existující jméno a nenajde neexistující jméno
-  }
+    }
 
 
 
@@ -43,8 +41,6 @@ class SvatkyTest {
   void getPocetJmen() {
     Svatky svatky = new Svatky();
     assertEquals(37, svatky.getPocetJmen());
-
-    //TODO Otestovat, že vrací počet jmen, která máme v seznamu
   }
 
   /**
@@ -55,8 +51,6 @@ class SvatkyTest {
     Svatky svatky = new Svatky();
     assertNotNull(svatky.getSeznamJmen());
     assertEquals(37, svatky.getSeznamJmen().size());
-
-    //TODO Zkontrolovat, že seznam jmen má správný počet položek.
   }
 
   /**
@@ -65,9 +59,8 @@ class SvatkyTest {
   @Test
   void pridatSvatekDenMesicInt() {
     Svatky svatky = new Svatky();
-
-
-    //TODO Otestuje, že je jméno v seznamu svátků a že má přiřazen správný den
+    svatky.pridatSvatek("Laura", 1, 6);
+    assertEquals(MonthDay.of(6, 1), svatky.kdyMaSvatek("Laura"));
   }
 
   /**
@@ -76,8 +69,8 @@ class SvatkyTest {
   @Test
   void pridatSvatekDenMesicMonth() {
     Svatky svatky = new Svatky();
-
-    //TODO Otestuje, že je jméno v seznamu svátků a že má přiřazen správný den
+    svatky.pridatSvatek("Jarmil", 2, Month.JUNE);
+    assertEquals(MonthDay.of(6, 2), svatky.kdyMaSvatek("Jarmil"));
   }
 
   /**
@@ -86,8 +79,8 @@ class SvatkyTest {
   @Test
   void prridatSvatekMonthDay() {
     Svatky svatky = new Svatky();
-
-    //TODO Otestuje, že je jméno v seznamu svátků a že má přiřazen správný den
+    svatky.pridatSvatek("Kevin", MonthDay.of(Month.JUNE, 3));
+    assertEquals(MonthDay.of(6, 3), svatky.kdyMaSvatek("Kevin"));
   }
 
   /**
@@ -96,7 +89,11 @@ class SvatkyTest {
   @Test
   void smazatSvatek() {
     Svatky svatky = new Svatky();
-
-    //TODO Zkontrolovat, že po smazání bude počet svátků odpovídat novému počtu.
+    int pocetSvatkuPoSmazani = svatky.getPocetJmen()-1;
+    String jmeno="Nataša";
+    assertTrue(svatky.jeVSeznamu(jmeno));
+    svatky.smazatSvatek(jmeno);
+    assertFalse(svatky.jeVSeznamu(jmeno));
+    assertEquals(pocetSvatkuPoSmazani, svatky.getPocetJmen());
   }
 }
